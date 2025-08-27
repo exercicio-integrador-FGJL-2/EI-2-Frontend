@@ -1,20 +1,39 @@
-<header>
-    <a href="">
-        <p>Logo</p>
-    </a>
-    <div class="nav-buttons">
-        <a href="">
-            <p>Agendamento</p>
-        </a>
-        <a href="">
-            <p>Gerenciamento</p>
-        </a>
-        <a href="">
-            <p>Estatísticas</p>
-        </a>
-    </div>
-</header>
+<main class="content">
+  <section class="card">
+    <form [formGroup]="form" (ngSubmit)="confirmar()" class="grid">
 
-<body>
-    <app-agendamento/>
-</body>
+      <!-- esquerda: seletor de usuário (grande) -->
+      <div class="left">
+        <mat-form-field appearance="fill" class="w-lg compact">
+          <mat-label>Usuário</mat-label>
+          <mat-select formControlName="usuarioId">
+            <mat-option *ngFor="let u of usuarios" [value]="u.id">{{ u.nome }}</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+
+      <!-- direita: três campos compactos empilhados -->
+      <div class="right">
+        <mat-form-field appearance="fill" class="w-sm compact">
+          <mat-label>Nome</mat-label>
+          <input matInput formControlName="nome" readonly />
+        </mat-form-field>
+
+        <mat-form-field appearance="fill" class="w-sm compact">
+          <mat-label>Matrícula</mat-label>
+          <input matInput formControlName="matricula" readonly />
+        </mat-form-field>
+
+        <mat-form-field appearance="fill" class="w-sm compact">
+          <mat-label>Cargo</mat-label>
+          <input matInput formControlName="cargo" readonly />
+        </mat-form-field>
+      </div>
+
+      <!-- botão central, fora das colunas -->
+      <div class="actions">
+        <button mat-raised-button color="primary" type="submit">Confirmar</button>
+      </div>
+    </form>
+  </section>
+</main>

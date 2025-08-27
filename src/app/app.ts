@@ -1,12 +1,21 @@
-import { Component, signal } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { Component, inject } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { Router, RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
+import { SessionService } from './core/session.service';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet],
+  standalone: true,
+  imports: [CommonModule, RouterOutlet, RouterLink, RouterLinkActive],
   templateUrl: './app.html',
-  styleUrl: './app.css'
+  styleUrls: ['./app.css'],
 })
-export class App {
-  protected readonly title = signal('projeto');
+export class AppComponent {
+  readonly session = inject(SessionService);
+  private readonly router = inject(Router);
+
+  logout() {
+    this.session.logout();
+    this.router.navigateByUrl('/');   // volta para seleção de usuário
+  }
 }
