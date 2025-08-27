@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, signal, computed } from '@angular/core';
+import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { provideNativeDateAdapter } from '@angular/material/core';
 import { MatDatepickerModule } from '@angular/material/datepicker';
@@ -11,6 +11,7 @@ import { MatButtonModule } from '@angular/material/button'
 
 @Component({
   selector: 'app-agendamento',
+  standalone: true,                         // ✅ necessário
   providers: [provideNativeDateAdapter()],
   imports: [
     MatSelectModule,
@@ -23,11 +24,10 @@ import { MatButtonModule } from '@angular/material/button'
     MatButtonModule
   ],
   templateUrl: './agendamento.html',
-  styleUrl: './agendamento.css',
+  styleUrls: ['./agendamento.css'],         // ✅ plural
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class Agendamento {
-
+export class AgendamentoComponent {
   notebookStatus = signal(false);
   labStatus = signal(false);
   roomStatus = signal(false);

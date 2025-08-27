@@ -1,30 +1,64 @@
-body {
-    background-color: #209199;
-    align-content: center;
-    justify-content: center;
+/* fundo abaixo do header */
+.content {
+  background: #1b8b8f;
+  min-height: calc(100dvh - 72px);
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
 }
 
-header {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
-    padding: 0 2rem;
-    background-color: #264653;
+/* card central */
+.card {
+  width: min(900px, 92vw);        
+  margin: 24px auto;               
+  padding: 20px;                   
+  background: #223c44;
+  border-radius: 14px;
+  box-shadow: 0 6px 28px rgba(0,0,0,.25);
+  color: #eef8f8;
+  align-self: flex-start;width: min(1100px, 94vw);
+  margin: 32px auto;
+  padding: 24px;
+  background: #223c44;
+  border-radius: 14px;
+  box-shadow: 0 6px 28px rgba(0,0,0,.25);
+  color: #eef8f8;
 }
 
-.nav-buttons {
-    display: flex;
-    flex-direction: row;
-    gap: 2rem;
+/* grid principal: select à esquerda, campos à direita */
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 420px;  /* direita mais estreita */
+  column-gap: 40px;
+  row-gap: 12px;
+  align-items: start;
+}
+.left  { grid-column: 1; }
+.right { grid-column: 2; display: flex; flex-direction: column; gap: 12px; }
+
+/* larguras dos campos */
+.w-lg { width: min(680px, 100%); }
+.w-sm { width: 100%; max-width: 380px; }
+
+/* botão centralizado no fim do card */
+.actions {
+  grid-column: 1 / -1;
+  display: flex;
+  justify-content: center;
+  margin-top: 8px;
 }
 
-.nav-buttons a {
-    text-decoration: none;
-    color: #E9C46A;
-    font-size: 1.1rem;
-}
+/* --- Compactação suave dos mat-form-field (appearance="fill") --- */
+.compact .mat-mdc-text-field-wrapper { padding-top: 6px; padding-bottom: 6px; }
+.compact .mat-mdc-form-field-infix   { padding-top: 6px; padding-bottom: 6px; }
+.compact .mat-mdc-form-field-subscript-wrapper { height: 0; } /* sem espaço p/ hints */
 
-.logo {
-    height: 5rem;
+/* evitar fundo teal gigante em readonly */
+input[readonly] { cursor: default; background: transparent; }
+
+/* responsivo */
+@media (max-width: 900px) {
+  .grid { grid-template-columns: 1fr; column-gap: 0; }
+  .right { grid-column: 1; }
+  .w-sm, .w-lg { max-width: 100%; }
 }
