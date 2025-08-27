@@ -2,13 +2,17 @@
     <div class="left-column">
         <mat-form-field>
             <mat-label>Data</mat-label>
-            <input matInput [matDatepicker]="picker">
-            <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
-            <mat-datepicker #picker></mat-datepicker>
+            <input matInput [matDatepicker]="picker1" [formControl]="date">
+            <mat-datepicker-toggle matIconSuffix [for]="picker1"></mat-datepicker-toggle>
+            <mat-datepicker #picker1></mat-datepicker>
         </mat-form-field>
-        <mat-checkbox (change)="roomSelection()" class="checkbox">Sala</mat-checkbox>
-        <mat-checkbox (change)="notebookSelection()" class="checkbox">Notebook</mat-checkbox>
+        <mat-checkbox [disabled]="roomCheckbox()" (change)="roomSelection()" class="checkbox">Sala</mat-checkbox>
+        <mat-checkbox [disabled]="notebookCheckbox()" (change)="notebookSelection()"
+            class="checkbox">Notebook</mat-checkbox>
         <mat-checkbox [disabled]="labCheckbox()" (change)="labSelection()" class="checkbox">Laboratorio</mat-checkbox>
+
+        
+
     </div>
     <div class="right-column">
         <div class="room-selection">

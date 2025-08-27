@@ -8,6 +8,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatButtonModule } from '@angular/material/button'
 
+
 @Component({
   selector: 'app-agendamento',
   providers: [provideNativeDateAdapter()],
@@ -26,7 +27,7 @@ import { MatButtonModule } from '@angular/material/button'
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class Agendamento {
-  // 
+
   notebookStatus = signal(false);
   labStatus = signal(false);
   roomStatus = signal(false);
@@ -39,17 +40,24 @@ export class Agendamento {
   labCheckbox = signal(false);
   roomCheckbox = signal(false);
 
-  readonly range = new FormGroup({
-    start: new FormControl<Date | null>(null),
-    end: new FormControl<Date | null>(null),
-  });
+  readonly date = new FormControl(new Date())
+
+  constructor() {
+    this.date.valueChanges.subscribe((selectedDate) => {
+      console.log('Selected date:', selectedDate);
+    });
+  }
 
   labSelection() {
     this.labStatus.set(!this.labStatus());
 
-    if (this.labStatus() == false) {
+    if (!this.labStatus()) {
       this.selectedLab.set('');
+      this.notebookCheckbox.set(false);
+      this.roomCheckbox.set(false);
     } else {
+      this.notebookCheckbox.set(true);
+      this.roomCheckbox.set(true);
       this.notebookStatus.set(false);
       this.roomStatus.set(false);
       this.selectedNotebook.set('');
@@ -60,10 +68,11 @@ export class Agendamento {
   notebookSelection() {
     this.notebookStatus.set(!this.notebookStatus());
 
-    if (this.notebookStatus() == false) {
+    if (!this.notebookStatus()) {
       this.selectedNotebook.set('');
-      this.labCheckbox.set(false);
-
+      if (!this.roomStatus()) {
+        this.labCheckbox.set(false);
+      }
     } else {
       this.labStatus.set(false);
       this.selectedLab.set('');
@@ -74,9 +83,11 @@ export class Agendamento {
   roomSelection() {
     this.roomStatus.set(!this.roomStatus());
 
-    if (this.roomStatus() == false) {
+    if (!this.roomStatus()) {
       this.selectedRoom.set('');
-      this.labCheckbox.set(false);
+      if (!this.notebookStatus()) {
+        this.labCheckbox.set(false);
+      }
     } else {
       this.labStatus.set(false);
       this.selectedLab.set('');
