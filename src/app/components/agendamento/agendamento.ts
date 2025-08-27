@@ -6,6 +6,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatButtonModule } from '@angular/material/button'
 
 @Component({
   selector: 'app-agendamento',
@@ -18,18 +19,25 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
     FormsModule,
     ReactiveFormsModule,
     MatCheckboxModule,
+    MatButtonModule
   ],
   templateUrl: './agendamento.html',
   styleUrl: './agendamento.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class Agendamento {
+  // 
   notebookStatus = signal(false);
   labStatus = signal(false);
   roomStatus = signal(false);
+
   selectedNotebook = signal('');
   selectedLab = signal('');
   selectedRoom = signal('');
+
+  notebookCheckbox = signal(false);
+  labCheckbox = signal(false);
+  roomCheckbox = signal(false);
 
   readonly range = new FormGroup({
     start: new FormControl<Date | null>(null),
@@ -41,12 +49,11 @@ export class Agendamento {
 
     if (this.labStatus() == false) {
       this.selectedLab.set('');
-    }
-  }
-
-  clearLabValue() {
-    if (!this.labStatus()) {
-      this.selectedLab.set('');
+    } else {
+      this.notebookStatus.set(false);
+      this.roomStatus.set(false);
+      this.selectedNotebook.set('');
+      this.selectedRoom.set('');
     }
   }
 
@@ -55,6 +62,12 @@ export class Agendamento {
 
     if (this.notebookStatus() == false) {
       this.selectedNotebook.set('');
+      this.labCheckbox.set(false);
+
+    } else {
+      this.labStatus.set(false);
+      this.selectedLab.set('');
+      this.labCheckbox.set(true);
     }
   }
 
@@ -63,15 +76,12 @@ export class Agendamento {
 
     if (this.roomStatus() == false) {
       this.selectedRoom.set('');
-    }
-
-  }
-
-  verifyLabStatus(){
-    if (this.roomStatus() == false && this.roomStatus() == false){
-        this.labStatus.set(true);
+      this.labCheckbox.set(false);
     } else {
-        this.labStatus.set(false);
+      this.labStatus.set(false);
+      this.selectedLab.set('');
+      this.labCheckbox.set(true);
     }
   }
+
 }

@@ -17,14 +17,9 @@
         </mat-form-field>
         <mat-checkbox (change)="roomSelection()" class="checkbox">Sala</mat-checkbox>
         <mat-checkbox (change)="notebookSelection()" class="checkbox">Notebook</mat-checkbox>
-        <mat-checkbox [disabled]="" (change)="labSelection()" class="checkbox">Laboratorio</mat-checkbox>
+        <mat-checkbox [disabled]="labCheckbox()" (change)="labSelection()" class="checkbox">Laboratorio</mat-checkbox>
 
-        <p>Sala: {{ selectedRoom() }}</p>
-        <p>Notebook: {{ selectedNotebook() }}</p>
-        <p>Laboratorio: {{ selectedLab() }}</p>
-        <p>Room Status: {{ roomStatus() }}</p>
-        <p>Note Status: {{ notebookStatus() }}</p>
-        <p>Lab Status: {{ labStatus() }}</p>
+    
     </div>
     <div class="right-column">
         <div class="room-selection">
@@ -54,5 +49,10 @@
                 <mat-option value="Laboratório 3">Laboratório 3</mat-option>
             </mat-select>
         </mat-form-field>
+
+        <div class="button-section">
+            <button matButton="filled">Confirmar</button>
+            <button matButton="filled">Cancelar</button>
+        </div>
     </div>
 </body>
