@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, signal, computed } from '@angular/core';
+import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { provideNativeDateAdapter } from '@angular/material/core';
 import { MatDatepickerModule } from '@angular/material/datepicker';
@@ -9,6 +9,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 
 @Component({
   selector: 'app-agendamento',
+  standalone: true,                         // ✅ necessário
   providers: [provideNativeDateAdapter()],
   imports: [
     MatSelectModule,
@@ -20,10 +21,10 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
     MatCheckboxModule,
   ],
   templateUrl: './agendamento.html',
-  styleUrl: './agendamento.css',
+  styleUrls: ['./agendamento.css'],         // ✅ plural
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class Agendamento {
+export class AgendamentoComponent {         // ✅ renomeado
   notebookStatus = signal(false);
   labStatus = signal(false);
   roomStatus = signal(false);
@@ -38,40 +39,29 @@ export class Agendamento {
 
   labSelection() {
     this.labStatus.set(!this.labStatus());
-
-    if (this.labStatus() == false) {
-      this.selectedLab.set('');
-    }
+    if (!this.labStatus()) this.selectedLab.set('');
   }
 
   clearLabValue() {
-    if (!this.labStatus()) {
-      this.selectedLab.set('');
-    }
+    if (!this.labStatus()) this.selectedLab.set('');
   }
 
   notebookSelection() {
     this.notebookStatus.set(!this.notebookStatus());
-
-    if (this.notebookStatus() == false) {
-      this.selectedNotebook.set('');
-    }
+    if (!this.notebookStatus()) this.selectedNotebook.set('');
   }
 
   roomSelection() {
     this.roomStatus.set(!this.roomStatus());
-
-    if (this.roomStatus() == false) {
-      this.selectedRoom.set('');
-    }
-
+    if (!this.roomStatus()) this.selectedRoom.set('');
   }
 
-  verifyLabStatus(){
-    if (this.roomStatus() == false && this.roomStatus() == false){
-        this.labStatus.set(true);
+  // ✅ corrigido: checar notebook e room (antes checava room duas vezes)
+  verifyLabStatus() {
+    if (!this.notebookStatus() && !this.roomStatus()) {
+      this.labStatus.set(true);
     } else {
-        this.labStatus.set(false);
+      this.labStatus.set(false);
     }
   }
 }

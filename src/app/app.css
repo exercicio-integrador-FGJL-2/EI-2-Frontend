@@ -1,4 +1,107 @@
-* {
-    margin: 0;
-    padding: 0;
+:host { display: contents; }
+
+html, body { margin: 0; }
+
+/* Barra superior */
+.topbar {
+  background: #1f3941;         /* cor do Figma */
+  color: #f6e8a7;
+}
+
+/* Container interno do header */
+.topbar .bar {
+  max-width: 1200px;
+  margin: 0 auto;
+  height: 72px;                 /* altura do header */
+  padding: 0 16px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: nowrap;            /* impede quebrar linha */
+}
+
+/* Marca (logo + texto) à esquerda */
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+  color: inherit;
+  font-weight: 700;
+  letter-spacing: .3px;
+}
+.brand img {
+  width: 44px; height: 44px;
+  border-radius: 999px;
+  background: #ffd79a;         /* círculo amarelo */
+  padding: 6px;
+  box-shadow: 0 0 0 2px rgba(0,0,0,.15) inset;
+}
+
+/* Menu à direita em linha única */
+.menu {
+  margin-left: auto;
+  display: flex;
+  gap: 36px;                    /* espaço entre itens */
+}
+.menu a {
+  display: inline-flex;
+  align-items: center;
+  height: 72px;                 /* mesma altura do header */
+  padding: 0 4px;
+  color: #f6e8a7;
+  text-decoration: none;
+  font-weight: 700;
+  letter-spacing: .3px;
+}
+.menu a:hover { opacity: .95; }
+.menu a.active {
+  text-decoration: underline;
+  text-underline-offset: 6px;   /* sublinhado afastado, como no Figma */
+}
+
+/* Responsivo opcional */
+@media (max-width: 880px) {
+  .menu { gap: 20px; }
+}
+
+/* Ações do usuário (nome + Sair) à direita do menu */
+.user-actions {
+  margin-left: 16px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex: 0 0 auto;
+}
+
+.user-name {
+  color: #f6e8a7;
+  font-weight: 600;
+  max-width: 220px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* Botão "Sair" */
+.btn-logout {
+  background: #cb573c;
+  color: #fff;
+  border: none;
+  padding: 8px 14px;
+  border-radius: 999px;
+  font-weight: 700;
+  cursor: pointer;
+}
+.btn-logout:hover { filter: brightness(1.06); }
+
+/* Opcional: texto "TNTG" no canto direito */
+.brand-right {
+  margin-left: 16px;
+  font-weight: 800;
+  letter-spacing: .4px;
+  color: #f6e8a7;
+  display: inline-flex;
+  align-items: center;
+  height: 72px;               /* mesma altura do header */
 }
