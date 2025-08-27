@@ -1,0 +1,51 @@
+body {
+    padding: 2rem;
+    display: flex;
+    border-radius: 24px;
+    justify-self: center;
+    justify-content: center;
+    width: fit-content;
+    height: fit-content;
+    background-color: #264653;
+    color: white;
+}
+
+mat-form-field {
+    width: 15rem;
+}
+
+::ng-deep .mdc-label{
+    color:white;
+}
+
+::ng-deep .mdc-checkbox {
+    border-color: #DD6041;
+}
+
+.left-column {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 50%;
+}
+
+.right-column {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 50%;
+    gap: 1rem;
+}
+
+.room-selection {
+    display: flex;
+    flex-direction: row;
+}
+
+input {
+    border-radius: 8px;
+}
+
+.mat-calendar-body-selected {
+    background-color: #DD6041;
+}

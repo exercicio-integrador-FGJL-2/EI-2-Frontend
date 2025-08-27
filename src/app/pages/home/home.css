@@ -1,0 +1,26 @@
+body {
+    background-color: #209199;
+    align-content: center;
+    justify-content: center;
+}
+
+header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 0 2rem;
+    background-color: #264653;
+}
+
+.nav-buttons {
+    width: 50%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.nav-buttons a {
+    text-decoration: none;
+    color: #E9C46A;
+    font-size: 1.1rem;
+}
