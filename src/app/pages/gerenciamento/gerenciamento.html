@@ -1,2 +1,50 @@
-<h2>Gerenciamento</h2>
-<p>telas de gerenciamento.</p>
+<main class="content">
+  <section class="card">
+
+    <div class="tabs">
+      <button class="tab" [class.active]="tab() === 'notebooks'" (click)="setTab('notebooks')">Notebooks</button>
+      <button class="tab" [class.active]="tab() === 'laboratorios'"
+        (click)="setTab('laboratorios')">Laboratórios</button>
+      <button class="tab" [class.active]="tab() === 'salas'" (click)="setTab('salas')">Salas</button>
+    </div>
+
+    <div class="table">
+      <div class="thead">
+        <div>{{ idHeader() }}</div> <!-- <== título dinâmico -->
+        <div>USUÁRIO:</div>
+        <div>DATA:</div>
+      </div>
+
+      <div class="tbody">
+        @for (it of pagedItems(); track it.id) {
+        <div class="row" [class.past]="it.status==='past'" [class.present]="it.status==='present'"
+          [class.future]="it.status==='future'">
+          <div class="cell id">{{ it.id }}</div>
+          <div class="cell user">{{ it.usuario }}</div>
+          <div class="cell date">{{ it.data | date:'dd/MM/yy' }}</div>
+        </div>
+        }
+      </div>
+
+
+
+    </div>
+    <div class="bla">
+      <div class="legend">
+        <span><i class="dot past"></i>Passado</span>
+        <span><i class="dot present"></i>Presente</span>
+        <span><i class="dot future"></i>Futuro</span>
+      </div>
+
+      @if (totalPages() > 1) {
+      <div class="pagination">
+        <button class="page-btn" (click)="prev()">&lt;</button>
+        @for (p of pages(); track p) {
+        <button class="page-btn" [class.active]="page() === p" (click)="go(p)">{{ p }}</button>
+        }
+        <button class="page-btn" (click)="next()">&gt;</button>
+      </div>
+      }
+    </div>
+  </section>
+</main>

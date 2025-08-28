@@ -1,9 +1,8 @@
 body {
+    justify-self: center;
     padding: 2rem;
     display: flex;
     border-radius: 24px;
-    justify-self: center;
-    justify-content: center;
     width: fit-content;
     height: fit-content;
     background-color: #264653;

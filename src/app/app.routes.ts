@@ -3,6 +3,7 @@ import { HomeComponent } from './pages/home/home';
 import { requireUserGuard } from './core/require-user.guard';
 
 export const routes: Routes = [
+ 
   { path: '', component: HomeComponent, pathMatch: 'full' },
 
   {
@@ -24,5 +25,6 @@ export const routes: Routes = [
     canActivate: [requireUserGuard],
   },
 
+  
   { path: '**', redirectTo: '' },
 ];

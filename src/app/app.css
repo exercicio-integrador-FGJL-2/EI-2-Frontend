@@ -1,6 +1,7 @@
 :host { display: contents; }
 
-html, body { margin: 0; }
+
+html, body { margin: 0;}
 
 /* Barra superior */
 .topbar {
@@ -11,7 +12,7 @@ html, body { margin: 0; }
 /* Container interno do header */
 .topbar .bar {
   max-width: 1200px;
-  margin: 0 auto;
+  margin: none;
   height: 72px;                 /* altura do header */
   padding: 0 16px;
   display: flex;

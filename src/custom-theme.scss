@@ -1,22 +1,7 @@
 
 @use '@angular/material' as mat;
 
-
-//paleta de cores
-$dd6041-palette:(500: #DD6041, contrast: (500: white)); //random teste
-
-//tema
-$my-theme: mat.define-theme((
-  color: (
-    primary: $dd6041-palette,
-  ),
-  ));
-
-  //plica tema 
-@include mat.checkbox-theme($my-theme);
-@include mat.button-theme($my-theme);
-
-/*html {
+html {
   @include mat.theme((
     color: (
       primary: mat.$azure-palette,
@@ -38,4 +23,3 @@ body {
  
   margin: 0;
 }
-  */
