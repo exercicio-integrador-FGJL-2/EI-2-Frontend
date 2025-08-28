@@ -6,13 +6,6 @@ export const routes: Routes = [
   { path: '', component: HomeComponent, pathMatch: 'full' },
 
   {
-    path: 'dashboard',
-    loadComponent: () =>
-      import('./pages/dashboard/dashboard').then(m => m.DashboardComponent),
-    canActivate: [requireUserGuard],
-  },
-
-  {
     path: 'agendamento',
     loadComponent: () =>
       import('./components/agendamento/agendamento').then(m => m.AgendamentoComponent),

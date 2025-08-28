@@ -18,9 +18,9 @@ mat-form-field {
     color:white;
 }
 
-::ng-deep .mdc-checkbox {
+.mdc-checkbox__native-control:checked + .mdc-checkbox__background {
     border-color: #DD6041;
-}
+    background-color: #DD6041;}
 
 .left-column {
     display: flex;

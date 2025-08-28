@@ -49,8 +49,8 @@ export class HomeComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    // se já existe usuário logado, vai direto pro dashboard
-    if (this.session.user()) this.router.navigate(['/dashboard']);
+    // se já existe usuário logado, vai direto pro gerenciamento
+    if (this.session.user()) this.router.navigate(['/gerenciamento']);
 
     this.form = this.fb.group<HomeForm>({
       usuarioId: this.fb.control<number | null>(null, { validators: [Validators.required] }),
@@ -75,6 +75,6 @@ export class HomeComponent implements OnInit {
     if (this.form.invalid) { this.form.markAllAsTouched(); return; }
     const u = this.usuarios.find(x => x.id === this.f.usuarioId.value!)!;
     this.session.login(u);                  // salva na sessão/localStorage
-    this.router.navigate(['/dashboard']);   // vai para o menu
+    this.router.navigate(['/gerenciamento']);   // vai para o menu
   }
 }

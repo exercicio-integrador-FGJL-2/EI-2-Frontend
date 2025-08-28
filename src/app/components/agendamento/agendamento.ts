@@ -9,7 +9,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 
 @Component({
   selector: 'app-agendamento',
-  standalone: true,                         // ✅ necessário
+  standalone: true,                        
   providers: [provideNativeDateAdapter()],
   imports: [
     MatSelectModule,
@@ -21,10 +21,10 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
     MatCheckboxModule,
   ],
   templateUrl: './agendamento.html',
-  styleUrls: ['./agendamento.css'],         // ✅ plural
+  styleUrls: ['./agendamento.css'],         
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class AgendamentoComponent {         // ✅ renomeado
+export class AgendamentoComponent {       
   notebookStatus = signal(false);
   labStatus = signal(false);
   roomStatus = signal(false);
@@ -56,7 +56,7 @@ export class AgendamentoComponent {         // ✅ renomeado
     if (!this.roomStatus()) this.selectedRoom.set('');
   }
 
-  // ✅ corrigido: checar notebook e room (antes checava room duas vezes)
+  
   verifyLabStatus() {
     if (!this.notebookStatus() && !this.roomStatus()) {
       this.labStatus.set(true);
