@@ -1,21 +1,23 @@
 <header class="topbar">
-  <div class="bar">
     <a class="brand" routerLink="/">
       <img src="/logoTNTG - Editado.png" alt="logo" />
     </a>
 
-    <nav class="menu" *ngIf="session.user()" aria-label="Principal">
-      <a routerLink="/gerenciamento" routerLinkActive="active">Gerenciamento</a>
-      <a routerLink="/agendamento" routerLinkActive="active">Agendamento</a>
-      <a routerLink="/estatisticas" routerLinkActive="active">Estatísticas</a>
-    </nav>
 
-    <!-- Nome do usuário + Sair -->
-    <div class="user-actions" *ngIf="session.user() as u">
-      <span class="user-name">{{ u.nome }}</span>
-      <button class="btn-logout" (click)="logout()">Sair</button>
+    <div class="aaa">
+
+      <nav class="menu" *ngIf="session.user()" aria-label="Principal">
+        <a routerLink="/gerenciamento" routerLinkActive="active">Gerenciamento</a>
+        <a routerLink="/agendamento" routerLinkActive="active">Agendamento</a>
+        <a routerLink="/estatisticas" routerLinkActive="active">Estatísticas</a>
+      </nav>
+      
+      <!-- Nome do usuário + Sair -->
+      <div class="user-actions" *ngIf="session.user() as u">
+        <span class="user-name">{{ u.nome }}</span>
+        <button class="btn-logout" (click)="logout()">Sair</button>
+      </div>
     </div>
-  </div>
 </header>
 
 <router-outlet></router-outlet>
