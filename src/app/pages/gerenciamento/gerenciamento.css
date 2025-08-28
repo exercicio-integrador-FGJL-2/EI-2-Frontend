@@ -1,2 +1,48 @@
-h2 { color: #fff7c8; }
-p { color: #eef8f8; }
+.content {
+  background: #1b8b8f;
+  min-height: calc(100dvh - 72px);
+  display: flex;
+  justify-content: center;
+}
+.card {
+  width: min(1100px, 94vw);
+  margin: 24px auto;
+  padding: 18px 18px 12px;
+  background: #223c44;
+  border-radius: 14px;
+  box-shadow: 0 6px 28px rgba(0,0,0,.25);
+  color: #eef8f8;
+}
+
+/* abas */
+.tabs { display: flex; gap: 8px; padding: 6px; background: rgba(255,255,255,.08); border-radius: 12px 12px 0 0; width: fit-content; margin: 0 0 10px 6px; }
+.tab { border: none; background: #cfe5e9; color: #24363c; padding: 10px 16px; border-radius: 10px 10px 0 0; font-weight: 700; cursor: pointer; }
+.tab.active { background: #1b8b8f; color: #fff7c8; }
+
+/* tabela */
+.table { background: #1e3a43; border-radius: 10px; padding: 16px; }
+.thead { display: grid; grid-template-columns: 1fr 1.6fr 0.8fr; padding: 6px 8px; color: #d8f0f0; font-weight: 800; letter-spacing: .8px; }
+.tbody { margin-top: 8px; display: grid; gap: 10px; padding-bottom: 16px; }
+.row { display: grid; grid-template-columns: 1fr 1.6fr 0.8fr; align-items: center; border-radius: 12px; padding: 10px 14px; color: #fff; font-weight: 700; letter-spacing: .5px; }
+.row.past    { background: #cb573c; }
+.row.present { background: #179a86; }
+.row.future  { background: #e0b237; }
+.cell { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.cell.id { padding-left: 8px; }
+.cell.date { justify-self: end; }
+
+/* legenda */
+.legend { display: flex; gap: 18px; align-items: center; margin: 350px 6px 8px; color: #eef8f8; font-weight: 700; }
+.dot { display:inline-block; width:14px; height:14px; border-radius:3px; margin-right:8px; vertical-align:-2px; }
+.dot.present { background:#179a86; } .dot.future { background:#e0b237; } .dot.past { background:#cb573c; }
+
+/* paginação */
+.pagination { display:flex; gap:10px; justify-content:center; align-items:center; margin:6px 0 0; }
+.page-btn { background:transparent; color:#fff; border:1px solid rgba(255,255,255,.25); border-radius:6px; padding:4px 10px; cursor:pointer; }
+.page-btn.active { background: rgba(255,255,255,.18); }
+
+/* responsivo */
+@media (max-width: 820px) {
+  .thead, .row { grid-template-columns: 1fr 1fr; }
+  .cell.date { display: none; }
+}
