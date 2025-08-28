@@ -6,6 +6,8 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatButtonModule } from '@angular/material/button'
+
 
 @Component({
   selector: 'app-agendamento',
@@ -19,49 +21,78 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
     FormsModule,
     ReactiveFormsModule,
     MatCheckboxModule,
+    MatButtonModule
   ],
   templateUrl: './agendamento.html',
   styleUrls: ['./agendamento.css'],         // ✅ plural
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class AgendamentoComponent {         // ✅ renomeado
+export class AgendamentoComponent {
   notebookStatus = signal(false);
   labStatus = signal(false);
   roomStatus = signal(false);
+
   selectedNotebook = signal('');
   selectedLab = signal('');
   selectedRoom = signal('');
 
-  readonly range = new FormGroup({
-    start: new FormControl<Date | null>(null),
-    end: new FormControl<Date | null>(null),
-  });
+  notebookCheckbox = signal(false);
+  labCheckbox = signal(false);
+  roomCheckbox = signal(false);
+
+  readonly date = new FormControl(new Date())
+
+  constructor() {
+    this.date.valueChanges.subscribe((selectedDate) => {
+      console.log('Selected date:', selectedDate);
+    });
+  }
 
   labSelection() {
     this.labStatus.set(!this.labStatus());
-    if (!this.labStatus()) this.selectedLab.set('');
-  }
 
-  clearLabValue() {
-    if (!this.labStatus()) this.selectedLab.set('');
+    if (!this.labStatus()) {
+      this.selectedLab.set('');
+      this.notebookCheckbox.set(false);
+      this.roomCheckbox.set(false);
+    } else {
+      this.notebookCheckbox.set(true);
+      this.roomCheckbox.set(true);
+      this.notebookStatus.set(false);
+      this.roomStatus.set(false);
+      this.selectedNotebook.set('');
+      this.selectedRoom.set('');
+    }
   }
 
   notebookSelection() {
     this.notebookStatus.set(!this.notebookStatus());
-    if (!this.notebookStatus()) this.selectedNotebook.set('');
+
+    if (!this.notebookStatus()) {
+      this.selectedNotebook.set('');
+      if (!this.roomStatus()) {
+        this.labCheckbox.set(false);
+      }
+    } else {
+      this.labStatus.set(false);
+      this.selectedLab.set('');
+      this.labCheckbox.set(true);
+    }
   }
 
   roomSelection() {
     this.roomStatus.set(!this.roomStatus());
-    if (!this.roomStatus()) this.selectedRoom.set('');
-  }
 
-  // ✅ corrigido: checar notebook e room (antes checava room duas vezes)
-  verifyLabStatus() {
-    if (!this.notebookStatus() && !this.roomStatus()) {
-      this.labStatus.set(true);
+    if (!this.roomStatus()) {
+      this.selectedRoom.set('');
+      if (!this.notebookStatus()) {
+        this.labCheckbox.set(false);
+      }
     } else {
       this.labStatus.set(false);
+      this.selectedLab.set('');
+      this.labCheckbox.set(true);
     }
   }
+
 }
