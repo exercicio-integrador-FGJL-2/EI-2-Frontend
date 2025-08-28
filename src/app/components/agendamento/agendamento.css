@@ -7,14 +7,20 @@ body {
     height: fit-content;
     background-color: #264653;
     color: white;
+    box-shadow: 0 3px 4px rgb(0, 0, 0, 0.6);
+}
+
+.form {
+    display: flex;
+    flex-direction: row;
 }
 
 mat-form-field {
     width: 15rem;
 }
 
-::ng-deep .mdc-label{
-    color:white;
+::ng-deep .mdc-label {
+    color: white;
 }
 
 .mdc-checkbox__native-control:checked + .mdc-checkbox__background {
@@ -47,4 +53,10 @@ input {
 
 .mat-calendar-body-selected {
     background-color: #DD6041;
+}
+
+.button-section {
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
 }
