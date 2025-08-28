@@ -48,10 +48,33 @@
   margin-top: 8px;
 }
 
-/* --- Compactação suave dos mat-form-field (appearance="fill") --- */
+
+.btn-confirm.mat-mdc-raised-button {
+  --mdc-protected-button-container-color: #cb573c;  
+  --mdc-protected-button-label-text-color: #ffffff; 
+  border-radius: 999px;
+  padding: 8px 16px;
+}
+.btn-confirm.mat-mdc-raised-button:hover { filter: brightness(1.06); }
+
+.btn-logout {
+  background: #cb573c;
+  color: #fff;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 999px;
+  font-weight: 700;
+  cursor: pointer;
+}
+.btn-logout:hover { filter: brightness(1.06); }
+
+
+
+
+
 .compact .mat-mdc-text-field-wrapper { padding-top: 6px; padding-bottom: 6px; }
 .compact .mat-mdc-form-field-infix   { padding-top: 6px; padding-bottom: 6px; }
-.compact .mat-mdc-form-field-subscript-wrapper { height: 0; } /* sem espaço p/ hints */
+.compact .mat-mdc-form-field-subscript-wrapper { height: 0; } 
 
 /* evitar fundo teal gigante em readonly */
 input[readonly] { cursor: default; background: transparent; }
