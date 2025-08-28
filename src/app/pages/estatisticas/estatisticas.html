@@ -1,2 +1,35 @@
-<h2>Estatísticas</h2>
-<p>i vão gráficos.</p>
+<body>
+   <div class="graph-container">
+
+    <p class="graph-title">Quantidade de recursos alocados</p>
+  <ngx-charts-bar-vertical
+    [view]="view"
+    [results]="resources"
+    [gradient]="gradient"
+    [xAxis]="showXAxis"
+    [yAxis]="showYAxis"
+    [legend]="showLegend"
+    [showXAxisLabel]="showXAxisLabel"
+    [showYAxisLabel]="showYAxisLabel"
+    xAxisLabel="Recursos"
+    yAxisLabel="Quantidade Reservada">
+  </ngx-charts-bar-vertical>
+</div>
+
+<div class="graph-container">
+    <p class="graph-title">Ocupação por dias da semana</p>
+  <ngx-charts-bar-vertical
+    [view]="view"
+    [results]="dias"
+    [gradient]="gradient"
+    [xAxis]="showXAxis"
+    [yAxis]="showYAxis"
+    [legend]="showLegend"
+    [showXAxisLabel]="showXAxisLabel"
+    [showYAxisLabel]="showYAxisLabel"
+    xAxisLabel="Dias"
+    yAxisLabel="Quantidade de Recursos">
+  </ngx-charts-bar-vertical>
+</div>
+
+</body>

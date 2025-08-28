@@ -1,21 +1,29 @@
 body {
+    margin-top: 5rem;
     padding: 2rem;
     display: flex;
     border-radius: 24px;
+    align-self: center;
     justify-self: center;
     justify-content: center;
     width: fit-content;
     height: fit-content;
     background-color: #264653;
     color: white;
+    box-shadow: 0 3px 4px rgb(0, 0, 0, 0.6);
+}
+
+.form {
+    display: flex;
+    flex-direction: row;
 }
 
 mat-form-field {
     width: 15rem;
 }
 
-::ng-deep .mdc-label{
-    color:white;
+::ng-deep .mdc-label {
+    color: white;
 }
 
 ::ng-deep .mdc-checkbox {
@@ -48,4 +56,10 @@ input {
 
 .mat-calendar-body-selected {
     background-color: #DD6041;
+}
+
+.button-section {
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
 }

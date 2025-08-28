@@ -1,2 +1,37 @@
-h2 { color: #fff7c8; }
-p { color: #eef8f8; }
+h2 {
+    color: #fff7c8;
+}
+
+p {
+    color: #eef8f8;
+}
+
+body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+}
+
+.graph-container {
+    background-color: #264653;
+    width: fit-content;
+    height: fit-content;
+    border-radius: 8px;
+    box-shadow: 0 3px 4px rgb(0, 0, 0, 0.6);
+    padding: 1rem;
+}
+
+.graph-title {
+    font-size: 1.25rem;
+    justify-self: center;
+    color: #E9C46A;
+}
+
+::ng-deep .ngx-charts text {
+  fill: #E9C46A;
+}
+
+::ng-deep .ng-star-inserted text {
+  font-size: 14px;
+}
