@@ -11,7 +11,7 @@ import { MatButtonModule } from '@angular/material/button'
 
 @Component({
   selector: 'app-agendamento',
-  standalone: true,                        
+  standalone: true,                         // ✅ necessário
   providers: [provideNativeDateAdapter()],
   imports: [
     MatSelectModule,
@@ -24,10 +24,10 @@ import { MatButtonModule } from '@angular/material/button'
     MatButtonModule
   ],
   templateUrl: './agendamento.html',
-  styleUrls: ['./agendamento.css'],         
+  styleUrls: ['./agendamento.css'],         // ✅ plural
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class AgendamentoComponent {       
+export class AgendamentoComponent {
   notebookStatus = signal(false);
   labStatus = signal(false);
   roomStatus = signal(false);
@@ -82,13 +82,12 @@ export class AgendamentoComponent {
 
   roomSelection() {
     this.roomStatus.set(!this.roomStatus());
-    if (!this.roomStatus()) this.selectedRoom.set('');
-  }
 
-  
-  verifyLabStatus() {
-    if (!this.notebookStatus() && !this.roomStatus()) {
-      this.labStatus.set(true);
+    if (!this.roomStatus()) {
+      this.selectedRoom.set('');
+      if (!this.notebookStatus()) {
+        this.labCheckbox.set(false);
+      }
     } else {
       this.labStatus.set(false);
       this.selectedLab.set('');

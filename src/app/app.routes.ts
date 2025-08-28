@@ -9,7 +9,7 @@ export const routes: Routes = [
   {
     path: 'agendamento',
     loadComponent: () =>
-      import('./components/agendamento/agendamento').then(m => m.AgendamentoComponent),
+      import('./pages/agendamento/agendamento').then(m => m.AgendamentoComponent),
     canActivate: [requireUserGuard],
   },
   {

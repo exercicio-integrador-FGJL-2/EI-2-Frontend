@@ -1,5 +1,13 @@
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+   
+}
+
 body {
-    justify-self: center;
     padding: 2rem;
     display: flex;
     border-radius: 24px;
@@ -22,6 +30,8 @@ mat-form-field {
 ::ng-deep .mdc-label {
     color: white;
 }
+
+
 
 .mdc-checkbox__native-control:checked + .mdc-checkbox__background {
     border-color: #DD6041;
