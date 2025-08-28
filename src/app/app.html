@@ -4,11 +4,9 @@
       <img src="/logoTNTG - Editado.png" alt="logo" />
     </a>
 
-    <!-- Menu (aparece só logado, se quiser) -->
     <nav class="menu" *ngIf="session.user()" aria-label="Principal">
-      <a routerLink="/dashboard" routerLinkActive="active">Menu</a>
-      <a routerLink="/agendamento" routerLinkActive="active">Agendamento</a>
       <a routerLink="/gerenciamento" routerLinkActive="active">Gerenciamento</a>
+      <a routerLink="/agendamento" routerLinkActive="active">Agendamento</a>
       <a routerLink="/estatisticas" routerLinkActive="active">Estatísticas</a>
     </nav>
 

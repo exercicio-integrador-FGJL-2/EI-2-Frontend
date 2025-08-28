@@ -1,6 +1,7 @@
 :host { display: contents; }
 
-html, body { margin: 0; }
+
+html, body { margin: 0;}
 
 /* Barra superior */
 .topbar {
@@ -11,11 +12,11 @@ html, body { margin: 0; }
 /* Container interno do header */
 .topbar .bar {
   max-width: 1200px;
-  margin: 0 auto;
+  margin: none;
   height: 72px;                 /* altura do header */
-  padding: 0 16px;
+  padding: 1 16px;
   display: flex;
-  align-items: center;
+  align-items: right;
   gap: 16px;
   flex-wrap: nowrap;            /* impede quebrar linha */
 }
@@ -31,11 +32,10 @@ html, body { margin: 0; }
   letter-spacing: .3px;
 }
 .brand img {
-  width: 44px; height: 44px;
+  width: 70px; height: 64px;
   border-radius: 999px;
-  background: #ffd79a;         /* círculo amarelo */
+  background: none;
   padding: 6px;
-  box-shadow: 0 0 0 2px rgba(0,0,0,.15) inset;
 }
 
 /* Menu à direita em linha única */
@@ -44,6 +44,7 @@ html, body { margin: 0; }
   display: flex;
   gap: 36px;                    /* espaço entre itens */
 }
+
 .menu a {
   display: inline-flex;
   align-items: center;
@@ -75,7 +76,7 @@ html, body { margin: 0; }
 }
 
 .user-name {
-  color: #f6e8a7;
+  color: #E9C46A;
   font-weight: 600;
   max-width: 220px;
   overflow: hidden;
