@@ -11,7 +11,7 @@ import { MatButtonModule } from '@angular/material/button'
 
 @Component({
   selector: 'app-agendamento',
-  standalone: true,                         // ✅ necessário
+  standalone: true,                        
   providers: [provideNativeDateAdapter()],
   imports: [
     MatSelectModule,
@@ -24,7 +24,7 @@ import { MatButtonModule } from '@angular/material/button'
     MatButtonModule
   ],
   templateUrl: './agendamento.html',
-  styleUrls: ['./agendamento.css'],         // ✅ plural
+  styleUrls: ['./agendamento.css'],         
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AgendamentoComponent {
