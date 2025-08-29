@@ -11,6 +11,7 @@ interface Item {
   usuario: string;
   data: Date;
   status: Status;
+  descricao: string;
 }
 
 @Component({
@@ -27,20 +28,39 @@ export class GerenciamentoComponent implements OnInit{
 
   // mock de dados (trocar pela API) ***AJUDA
   private hoje = new Date();
-  recursos : RecursoFuncionario[] = []
 
-  constructor(private recursoFunService :RecursofuncionarioService){}
-  
-
-  private mk = (id: string, usuario: string, dias: number): Item => {
+  private mk = (id: string, usuario: string, dias: number, descricao: string): Item => {
     const d = new Date(this.hoje);
     d.setDate(this.hoje.getDate() + dias);
     let status: Status = 'present';
     if (dias < 0) status = 'past';
     if (dias > 0) status = 'future';
-    return { id, usuario, data: d, status };
+    return { id, usuario, data: d, status, descricao};
   };
 
+  data: Record<Recurso, Item[]> = {
+    salas: [
+      this.mk('12345678', 'Fulano de Tal', -1, 'Sala com projetor'),
+      this.mk('12345679', 'Beltrano',      -3, 'Sala com projetor'),
+      this.mk('12345680', 'Ciclano',        0, 'Sala com projetor'),
+      this.mk('12345681', 'Maria Lima',     2, 'Sala sem projetor'),
+      this.mk('12345682', 'Joana',          5, 'Sala com projetor'),
+      this.mk('12345683', 'Carlos',         8, 'Sala com projetor'),
+      this.mk('12345684', 'Sofia',         14, 'Sala sem projetor'),
+    ],
+    laboratorios: [
+      this.mk('Lab 01', 'Equipe A',  0, 'LAB-007'),
+      this.mk('Lab 02', 'Equipe B', -2, 'Lab IT Academy'),
+      this.mk('Lab 03', 'Equipe C',  6, 'Lapro'),
+      this.mk('Lab 04', 'Equipe D', 12, 'Laboratório informática'),
+    ],
+    notebooks: [
+      this.mk('NTB-001', 'Leo',   -1, 'Acer nitro 5'),
+      this.mk('NTB-002', 'Ana',    0, 'Dell'),
+      this.mk('NTB-003', 'Rafa',   4, 'Positivo'),
+      this.mk('NTB-004', 'Lia',    9, 'Mac'),
+    ],
+  };
 
   // paginação
   pageSize = 6;
@@ -91,5 +111,14 @@ export class GerenciamentoComponent implements OnInit{
          : 'Passado';
   }
 
-  
+  selectedItem = signal<Item | null>(null);
+
+openPopup(item: Item) {
+    this.selectedItem.set(item);
+  }
+
+closePopup() {
+  this.selectedItem.set(null);
+}
+
 }
