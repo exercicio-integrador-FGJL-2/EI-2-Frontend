@@ -9,16 +9,18 @@ html, body { margin: 0;}
   color: #E9C46A;
 }
 
+.aaa {
+  display: flex;
+  align-self: center;
+}
+
 /* Container interno do header */
-.topbar .bar {
-  max-width: 1200px;
-  margin: none;
-  height: 72px;                 /* altura do header */
-  padding: 1 16px;
+.topbar {
+  padding: 0 1rem;                /* altura do header */
   display: flex;
   align-items: right;
+  justify-content: space-between;
   gap: 16px;
-  flex-wrap: nowrap;            /* impede quebrar linha */
 }
 
 /* Marca (logo + texto) à esquerda */

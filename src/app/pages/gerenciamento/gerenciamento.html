@@ -3,8 +3,7 @@
 
     <div class="tabs">
       <button class="tab" [class.active]="tab() === 'notebooks'" (click)="setTab('notebooks')">Notebooks</button>
-      <button class="tab" [class.active]="tab() === 'laboratorios'"
-        (click)="setTab('laboratorios')">Laboratórios</button>
+      <button class="tab" [class.active]="tab() === 'laboratorios'"(click)="setTab('laboratorios')">Laboratórios</button>
       <button class="tab" [class.active]="tab() === 'salas'" (click)="setTab('salas')">Salas</button>
     </div>
 
@@ -17,8 +16,11 @@
 
       <div class="tbody">
         @for (it of pagedItems(); track it.id) {
-        <div class="row" [class.past]="it.status==='past'" [class.present]="it.status==='present'"
-          [class.future]="it.status==='future'">
+        <div class="row" 
+          [class.past]="it.status==='past'" 
+          [class.present]="it.status==='present'"
+          [class.future]="it.status==='future'"
+          (click)="openPopup(it)">
           <div class="cell id">{{ it.id }}</div>
           <div class="cell user">{{ it.usuario }}</div>
           <div class="cell date">{{ it.data | date:'dd/MM/yy' }}</div>
@@ -46,5 +48,18 @@
       </div>
       }
     </div>
+
+      <div class="popup-backdrop" *ngIf="selectedItem()">
+      <div class="popup">
+
+      <p><strong>ID:</strong> {{ selectedItem()?.id }}</p>
+      <p><strong>Usuário:</strong> {{ selectedItem()?.usuario }}</p>
+      <p><strong>Data:</strong> {{ selectedItem()?.data | date:'dd/MM/yyyy' }}</p>
+      <p><strong>Descrição:</strong> {{ selectedItem()?.descricao }}</p> 
+
+      <button class="close-btn" (click)="closePopup()">Fechar</button>
+     </div>
+    </div>
+
   </section>
 </main>
