@@ -28,6 +28,10 @@ export class GerenciamentoComponent implements OnInit{
 
   // mock de dados (trocar pela API) ***AJUDA
   private hoje = new Date();
+  recursos : RecursoFuncionario[] = []
+
+  constructor(private recursoFunService :RecursofuncionarioService){}
+  
 
   private mk = (id: string, usuario: string, dias: number, descricao: string): Item => {
     const d = new Date(this.hoje);
@@ -110,6 +114,8 @@ export class GerenciamentoComponent implements OnInit{
          : status === 'future'  ? 'Futuro'
          : 'Passado';
   }
+
+  
 
   selectedItem = signal<Item | null>(null);
 
