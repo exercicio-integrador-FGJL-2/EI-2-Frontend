@@ -8,6 +8,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { Notebook } from '../../models/notebook';
 import { Laboratorio } from '../../models/laboratorio';
 import { Sala } from '../../models/sala';
+import { RecursofuncionarioService } from '../../services/recursofuncionario.service';
+import { RecursoFuncionario } from '../../models/recursoFuncionario';
 
 interface Data {
   name: String,
@@ -41,35 +43,39 @@ export class EstatisticasComponent {
   moreFrequent = '#E9C46A';
   lessFrequent = '#2A9D8F';
 
-  notebooks: Notebook[] = [];
-  laboratorios: Laboratorio[] = [];
-  salas: Sala[] = [];
+  notebooks: RecursoFuncionario[] = [];
+  laboratorios: RecursoFuncionario[] = [];
+  salas: RecursoFuncionario[] = [];
   resources = new Set<Data>();
   dias = new Set<Data>();
 
   constructor(
-    private 
+    private recursoFuncionarioService: RecursofuncionarioService
   ) { }
 
+  // 0 = sala /  1 = lab / 2 = note
 
   ngOnInit(): void {
 
     // req
 
-    this.notebookService.getNotebooks().subscribe((data) => {
-      this.notebooks = data;
-    });
+    this.recursoFuncionarioService.getRecursosFuncionarios().subscribe((data) => {
+      data.forEach(d => {
+        switch (d.TipoRecurso) {
+          case 0:
+            this.salas.push(d);
+            break;
+          case 1:
+            this.laboratorios.push(d);
+            break;
+          case 2:
+            this.notebooks.push(d);
+            break;
+        }
+      });
+    })
 
-    this.labService.getLaboratorios().subscribe((data) => {
-      this.laboratorios = data;
-    });
-
-    this.salaService.getSalas().subscribe((data) => {
-      this.salas = data;
-    }
-    );
-
-    this.salas.forEach(sala => {
+    this.salas.forEach(_ => {
       this.resources.has({ name: 'Sala', value: 0 }) ? this.resources.forEach(resource => {
         if (resource.name === 'Sala') {
           resource.value += 1;
@@ -77,7 +83,7 @@ export class EstatisticasComponent {
       }) : this.resources.add({ name: 'Sala', value: 1 })
     });
 
-    this.laboratorios.forEach(laboratorio => {
+    this.laboratorios.forEach(_ => {
       this.resources.has({ name: 'Laboratorio', value: 0 }) ? this.resources.forEach(resource => {
         if (resource.name === 'Laboratorio') {
           resource.value += 1;
@@ -85,7 +91,7 @@ export class EstatisticasComponent {
       }) : this.resources.add({ name: 'Laboratorio', value: 1 })
     });
 
-    this.notebooks.forEach(notebook => {
+    this.notebooks.forEach(_ => {
       this.resources.has({ name: 'Notebook', value: 0 }) ? this.resources.forEach(resource => {
         if (resource.name === 'Notebook') {
           resource.value += 1;
@@ -93,24 +99,14 @@ export class EstatisticasComponent {
       }) : this.resources.add({ name: 'Notebook', value: 1 })
     });
 
-    this.notebooks.forEach(notebook => {
-      const dia = new Date(notebook.data);
-      const diaSemana = dia.getDay();
+
+    
 
 
   }
 
 
 
-customColors = [
-  { name: 'Notebook', value:  },
-  { name: 'Sala', value: '#F4A261' },
-  { name: 'Laboratório', value: '#E76F51' },
-
-
-  { name: 'Segunda-Feira', value: '#E9C46A' },
-  { name: 'Quarta-Feira', value: '#2A9D8F' },
-]
 
 }
 
