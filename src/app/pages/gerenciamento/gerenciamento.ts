@@ -1,5 +1,7 @@
-import { Component, computed, signal } from '@angular/core';
+import { Component, computed, OnInit, signal } from '@angular/core';
 import { CommonModule, DatePipe } from '@angular/common';
+import { RecursoFuncionario } from '../../models/recursoFuncionario';
+import { RecursofuncionarioService } from '../../services/recursofuncionario.service';
 
 type Recurso = 'notebooks' | 'laboratorios' | 'salas';
 type Status  = 'past' | 'present' | 'future';
@@ -20,12 +22,16 @@ interface Item {
   templateUrl: './gerenciamento.html',
   styleUrls: ['./gerenciamento.css'],
 })
-export class GerenciamentoComponent {
+export class GerenciamentoComponent implements OnInit{
   // aba ativa
   tab = signal<Recurso>('salas');
 
   // mock de dados (trocar pela API) ***AJUDA
   private hoje = new Date();
+  recursos : RecursoFuncionario[] = []
+
+  constructor(private recursoFunService :RecursofuncionarioService){}
+  
 
   private mk = (id: string, usuario: string, dias: number, descricao: string): Item => {
     const d = new Date(this.hoje);
@@ -84,7 +90,11 @@ export class GerenciamentoComponent {
     : this.tab() === 'laboratorios'
       ? 'N° LABORATÓRIO'
       : 'N° NOTEBOOK' 
-);
+  );
+
+  ngOnInit(): void {
+  }
+
 
   setTab(t: Recurso) {
     if (this.tab() !== t) {
@@ -104,6 +114,8 @@ export class GerenciamentoComponent {
          : status === 'future'  ? 'Futuro'
          : 'Passado';
   }
+
+  
 
   selectedItem = signal<Item | null>(null);
 

@@ -9,12 +9,14 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatButtonModule } from '@angular/material/button';
-import { SessionService, Usuario } from '../../core/session.service';
+import { SessionService} from '../../core/session.service';
+import { FuncionarioService } from '../../services/funcionario.service';
+import { Funcionario } from '../../models/funcionario';
 
 type HomeForm = {
   usuarioId: FormControl<number | null>;
   nome: FormControl<string>;
-  matricula: FormControl<string>;
+  matricula: FormControl<number>;
   cargo: FormControl<string>;
 };
 
@@ -32,20 +34,13 @@ export class HomeComponent implements OnInit {
   form!: FormGroup<HomeForm>;
 
   // Mock — troque por API quando quiser
-  usuarios: Usuario[] = [
-    { id: 1, nome: 'Leonardo Souza', matricula: '0001', cargo: 'Professor'   },
-    { id: 2, nome: 'Rafael Pereira', matricula: '0002', cargo: 'Técnico'     },
-    { id: 3, nome: 'Pedro Magralhães', matricula: '0003', cargo: 'Coordenador' },
-    { id: 4, nome: 'Roberto Carneiro', matricula: '0004', cargo: 'Estagiário'  },
-    { id: 5, nome: 'Mauricio Costa', matricula: '0005', cargo: 'Professor'   },
-    { id: 6, nome: 'Fabricio SIlva', matricula: '0006', cargo: 'Técnico'     },
-    { id: 7, nome: 'Fernando Meireles', matricula: '0007', cargo: 'Coordenador'},
-  ];
+  funcionarios: Funcionario[] = []
 
   constructor(
     private fb: NonNullableFormBuilder,
     private router: Router,
-    private session: SessionService
+    private session: SessionService,
+    private funcionarioService : FuncionarioService
   ) {}
 
   ngOnInit(): void {
@@ -55,15 +50,20 @@ export class HomeComponent implements OnInit {
     this.form = this.fb.group<HomeForm>({
       usuarioId: this.fb.control<number | null>(null, { validators: [Validators.required] }),
       nome:       this.fb.control(''),
-      matricula:  this.fb.control(''),
+      matricula:  this.fb.control(0),
       cargo:      this.fb.control(''),
     });
+    
+    this.funcionarioService.getFuncionarios().subscribe(f =>{
+        this.funcionarios = f;
+    })
 
-    this.form.controls.usuarioId.valueChanges.subscribe(id => {
-      const u = this.usuarios.find(x => x.id === id) ?? null;
+
+    this.form.controls.usuarioId.valueChanges.subscribe(matricula => {
+      const u = this.funcionarios.find(x => x.matricula === matricula) ?? null;
       this.form.patchValue({
         nome:       u?.nome ?? '',
-        matricula:  u?.matricula ?? '',
+        matricula:  u?.matricula ?? 0,
         cargo:      u?.cargo ?? '',
       });
     });
@@ -73,7 +73,7 @@ export class HomeComponent implements OnInit {
 
   confirmar() {
     if (this.form.invalid) { this.form.markAllAsTouched(); return; }
-    const u = this.usuarios.find(x => x.id === this.f.usuarioId.value!)!;
+    const u = this.funcionarios.find(x => x.matricula === this.f.matricula.value!)!;
     this.session.login(u);                  // salva na sessão/localStorage
     this.router.navigate(['/gerenciamento']);   // vai para o menu
   }
