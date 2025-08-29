@@ -5,7 +5,7 @@ import { Laboratorio } from '../models/laboratorio';
 
 @Injectable({ providedIn: 'root' })
 export class LaboratorioService {
-  private url = 'http://localhost:5228/api/labs';
+  private url = 'http://localhost:5228/api/Laboratorio';
 
   constructor(private http: HttpClient) {}
 
@@ -14,7 +14,7 @@ export class LaboratorioService {
   }
 
   getLaboratorioById(id: number): Observable<Laboratorio> {
-    return this.http.get<Laboratorio>(`${this.url}/${id}`);
+    return this.http.get<Laboratorio>(`${this.url}/${id}`); //http://localhost:5228/api/Laboratorio/id
   }
 
   updateLaboratorio(id: number, req: Laboratorio): Observable<Laboratorio> {

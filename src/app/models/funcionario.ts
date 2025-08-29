@@ -1,6 +1,6 @@
 export interface Funcionario {
-    Matricula: number,
-    Nome: string,
-    Cargo: string,
-    DAdmissao: Date
+    matricula: number,
+    nome: string,
+    cargo: string,
+    dadmissao: Date
 }

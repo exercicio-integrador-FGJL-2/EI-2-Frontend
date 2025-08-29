@@ -1,72 +1,92 @@
 .container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    height: 100%;
-   
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
 }
 
-body {
-    padding: 2rem;
-    display: flex;
-    border-radius: 24px;
-    width: fit-content;
-    height: fit-content;
-    background-color: #264653;
-    color: white;
-    box-shadow: 0 3px 4px rgb(0, 0, 0, 0.6);
+
+.panel {
+  padding: 2rem;
+  display: flex;
+  border-radius: 24px;
+  width: fit-content;
+  height: fit-content;
+  background-color: #264653;
+  color: white;
+  box-shadow: 0 3px 4px rgb(0 0 0 / 60%);
 }
 
 .form {
-    display: flex;
-    flex-direction: row;
+  display: flex;
+  flex-direction: row;
 }
 
 mat-form-field {
-    width: 15rem;
+  width: 15rem;
 }
 
 ::ng-deep .mdc-label {
-    color: white;
+  color: white;
 }
 
-
-
 .mdc-checkbox__native-control:checked + .mdc-checkbox__background {
-    border-color: #DD6041;
-    background-color: #DD6041;}
+  border-color: #DD6041;
+  background-color: #DD6041;
+}
 
 .left-column {
-    display: flex;
-    flex-direction: column;
-    height: 100%;
-    width: 50%;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 50%;
 }
 
 .right-column {
-    display: flex;
-    flex-direction: column;
-    height: 100%;
-    width: 50%;
-    gap: 1rem;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 50%;
+  gap: 1rem;
 }
 
 .room-selection {
-    display: flex;
-    flex-direction: row;
+  display: flex;
+  flex-direction: row;
 }
 
 input {
-    border-radius: 8px;
+  border-radius: 8px;
 }
 
 .mat-calendar-body-selected {
-    background-color: #DD6041;
+  background-color: #DD6041;
 }
 
 .button-section {
-    display: flex;
-    flex-direction: row;
-    gap: 1rem;
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+}
+
+
+.btn-orange.mat-mdc-flat-button,
+.btn-orange.mat-mdc-raised-button,
+.btn-orange.mat-mdc-unelevated-button {
+
+  --mdc-filled-button-container-color: #DD6041;
+  --mdc-filled-button-label-text-color: #ffffff;
+
+  
+  background-color: #DD6041 !important;
+  color: #ffffff !important;
+
+  border-radius: 999px;
+}
+
+.btn-orange.mat-mdc-flat-button:hover,
+.btn-orange.mat-mdc-raised-button:hover,
+.btn-orange.mat-mdc-unelevated-button:hover {
+  filter: brightness(0.95);
 }
