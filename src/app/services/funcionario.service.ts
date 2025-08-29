@@ -5,7 +5,7 @@ import { Funcionario } from '../models/funcionario';
 
 @Injectable({ providedIn: 'root' })
 export class FuncionarioService {
-  private url = 'http://localhost:5228/api/funcionarios';
+  private url = 'http://localhost:5228/api/Funcionario/all';
 
   constructor(private http: HttpClient) {}
 

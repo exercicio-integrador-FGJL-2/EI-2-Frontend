@@ -1,5 +1,7 @@
-import { Component, computed, signal } from '@angular/core';
+import { Component, computed, OnInit, signal } from '@angular/core';
 import { CommonModule, DatePipe } from '@angular/common';
+import { RecursoFuncionario } from '../../models/recursoFuncionario';
+import { RecursofuncionarioService } from '../../services/recursofuncionario.service';
 
 type Recurso = 'notebooks' | 'laboratorios' | 'salas';
 type Status  = 'past' | 'present' | 'future';
@@ -19,12 +21,16 @@ interface Item {
   templateUrl: './gerenciamento.html',
   styleUrls: ['./gerenciamento.css'],
 })
-export class GerenciamentoComponent {
+export class GerenciamentoComponent implements OnInit{
   // aba ativa
   tab = signal<Recurso>('salas');
 
   // mock de dados (trocar pela API) ***AJUDA
   private hoje = new Date();
+  recursos : RecursoFuncionario[] = []
+
+  constructor(private recursoFunService :RecursofuncionarioService){}
+  
 
   private mk = (id: string, usuario: string, dias: number): Item => {
     const d = new Date(this.hoje);
@@ -35,29 +41,6 @@ export class GerenciamentoComponent {
     return { id, usuario, data: d, status };
   };
 
-  data: Record<Recurso, Item[]> = {
-    salas: [
-      this.mk('12345678', 'Fulano de Tal', -1),
-      this.mk('12345679', 'Beltrano',      -3),
-      this.mk('12345680', 'Ciclano',        0),
-      this.mk('12345681', 'Maria Lima',     2),
-      this.mk('12345682', 'Joana',          5),
-      this.mk('12345683', 'Carlos',         8),
-      this.mk('12345684', 'Sofia',         14),
-    ],
-    laboratorios: [
-      this.mk('Lab 01', 'Equipe A',  0),
-      this.mk('Lab 02', 'Equipe B', -2),
-      this.mk('Lab 03', 'Equipe C',  6),
-      this.mk('Lab 04', 'Equipe D', 12),
-    ],
-    notebooks: [
-      this.mk('NTB-001', 'Leo',   -1),
-      this.mk('NTB-002', 'Ana',    0),
-      this.mk('NTB-003', 'Rafa',   4),
-      this.mk('NTB-004', 'Lia',    9),
-    ],
-  };
 
   // paginação
   pageSize = 6;
@@ -83,7 +66,11 @@ export class GerenciamentoComponent {
     : this.tab() === 'laboratorios'
       ? 'N° LABORATÓRIO'
       : 'N° NOTEBOOK' 
-);
+  );
+
+  ngOnInit(): void {
+  }
+
 
   setTab(t: Recurso) {
     if (this.tab() !== t) {
@@ -103,4 +90,6 @@ export class GerenciamentoComponent {
          : status === 'future'  ? 'Futuro'
          : 'Passado';
   }
+
+  
 }

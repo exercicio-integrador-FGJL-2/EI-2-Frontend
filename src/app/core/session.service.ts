@@ -1,19 +1,19 @@
 import { Injectable, signal } from '@angular/core';
+import { Funcionario } from '../models/funcionario';
 
-export type Usuario = { id: number; nome: string; matricula: string; cargo: string };
 
 @Injectable({ providedIn: 'root' })
 export class SessionService {
   private readonly KEY = 'ei2:user';
-  user = signal<Usuario | null>(this.load());
+  user = signal<Funcionario | null>(this.load());
 
-  private load(): Usuario | null {
+  private load(): Funcionario | null {
     const raw = localStorage.getItem(this.KEY);
-    try { return raw ? JSON.parse(raw) as Usuario : null; } catch { return null; }
+    try { return raw ? JSON.parse(raw) as Funcionario : null; } catch { return null; }
   }
-  login(u: Usuario) {
-    this.user.set(u);
-    localStorage.setItem(this.KEY, JSON.stringify(u));
+  login(f: Funcionario) {
+    this.user.set(f);
+    localStorage.setItem(this.KEY, JSON.stringify(f));
   }
   logout() {
     this.user.set(null);
