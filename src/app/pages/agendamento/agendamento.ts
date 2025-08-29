@@ -6,12 +6,12 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatCheckboxModule } from '@angular/material/checkbox';
-import { MatButtonModule } from '@angular/material/button';
-
+import { MatButtonModule } from '@angular/material/button'
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-agendamento',
-  standalone: true,                         // ✅ necessário
+  standalone: true,                        
   providers: [provideNativeDateAdapter()],
   imports: [
     MatSelectModule,
@@ -21,10 +21,11 @@ import { MatButtonModule } from '@angular/material/button';
     FormsModule,
     ReactiveFormsModule,
     MatCheckboxModule,
-    MatButtonModule
-  ],
+    MatButtonModule,
+    RouterLink
+],
   templateUrl: './agendamento.html',
-  styleUrls: ['./agendamento.css'],         // ✅ plural
+  styleUrls: ['./agendamento.css'],         
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AgendamentoComponent {
